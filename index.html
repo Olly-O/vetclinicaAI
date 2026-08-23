@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная демонстрация для клиники</title>
+    <style>
+        /* Растягиваем страницу и фиксируем скриншот на заднем плане */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f0f2f5;
+        }
+        .bg-container {
+            width: 100%;
+            height: 100%;
+            /* Подставляем ваш скриншот */
+            background-image: url('background.jpg'); 
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Легкое размытие, чтобы фокус внимания сместился на ИИ-чат */
+            filter: blur(1px) brightness(95%); 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Контейнер для фонового изображения -->
+    <div class="bg-container"></div>
+
+    <!-- ВСТАВЬТЕ СЮДА ВАШ КОД ВИДЖЕТА ИЗ CHAT-DATA -->
+    <script>
+      // Код скрипта, который вы скопировали в личном кабинете Chat-Data
+    </script>
+
+</body>
+</html>
