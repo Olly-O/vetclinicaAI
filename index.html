@@ -3,242 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetAI - HIPAA-Compliant AI Assistants for Veterinary Practices</title>
+    <title>Interactive AI Sandbox Demonstration</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        :root {
-            --primary: #0F172A;
-            --accent: #2563EB;
-            --text: #334155;
-            --bg: #F8FAFC;
-        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--primary);
-            line-height: 1.5;
-            overflow-x: hidden;
+        body, html { width: 100%; height: 100%; font-family: 'Inter', sans-serif; background: #0F172A; color: #F8FAFC; overflow-x: hidden; }
+        
+        /* Фиксированный фон-скриншот клиники */
+        .bg-screenshot {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('background.jpg'); background-position: center top;
+            background-repeat: no-repeat; background-size: cover;
+            filter: blur(3px) brightness(40%); z-index: 1;
         }
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px 40px 20px;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        .hero-content { display: flex; flex-direction: column; align-items: flex-start; }
-        .badge {
-            display: inline-block;
-            background-color: #DBEAFE;
-            color: #1E40AF;
-            padding: 6px 16px;
-            border-radius: 99px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        h1 { font-size: 48px; font-weight: 700; letter-spacing: -1px; margin-bottom: 20px; color: var(--primary); }
-        h1 span { color: var(--accent); }
-        .subtitle { font-size: 20px; color: var(--text); margin: 0 0 40px 0; }
-        .cta-pointer {
-            background-color: #EFF6FF;
-            border: 1px dashed var(--accent);
-            padding: 16px;
-            border-radius: 8px;
-            display: inline-block;
-            font-weight: 500;
-            color: var(--accent);
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        .hero-visual { display: flex; justify-content: center; }
-        .mockup-card {
-            background: #0F172A; border-radius: 12px; width: 100%; max-width: 450px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid #334155;
-            font-family: monospace; font-size: 13px;
-        }
-        .mockup-header {
-            background: #1E293B; padding: 12px; border-top-left-radius: 11px;
-            border-top-right-radius: 11px; display: flex; align-items: center; border-bottom: 1px solid #334155;
-        }
-        .dot { width: 8px; height: 8px; background: #EF4444; border-radius: 50%; display: inline-block; margin-right: 6px; }
-        .dot:nth-child(2) { background: #F59E0B; }
-        .dot:nth-child(3) { background: #10B981; }
-        .mockup-title { color: #94A3B8; margin-left: 12px; font-size: 11px; font-family: 'Inter', sans-serif; font-weight: 500; }
-        .mockup-body { padding: 20px; color: #E2E8F0; }
-        .chat-line { margin-bottom: 16px; padding: 10px; border-radius: 6px; }
-        .chat-line.incoming { background: #1E293B; border-left: 3px solid #64748B; }
-        .chat-line.outgoing { background: #1E3A8A; border-left: 3px solid #2563EB; }
-        .alert-text { color: #F87171; font-weight: bold; }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .feature-card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
-        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--primary); }
-        .feature-card p { font-size: 14px; color: var(--text); }
-        .roi-container { max-width: 1200px; margin: 60px auto; background: white; padding: 40px; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
-        .roi-container h2 { font-size: 32px; font-weight: 700; margin-bottom: 8px; text-align: center; }
-        .roi-container h2 span { color: #2563EB; }
-        .roi-subtitle { text-align: center; color: #64748B; margin-bottom: 40px; font-size: 16px; }
-        .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .input-group { margin-bottom: 28px; }
-        .input-group label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 10px; color: #334155; }
-        .input-group label span { color: #2563EB; font-weight: 700; }
-        .input-group input[type="range"] { width: 100%; -webkit-appearance: none; height: 8px; border-radius: 4px; background: #E2E8F0; outline: none; }
-        .input-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #2563EB; cursor: pointer; transition: transform 0.1s; }
-        .input-group input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-        .roi-results { display: grid; grid-template-rows: auto 1fr; gap: 16px; }
-        .result-card { background: #F8FAFC; border: 1px solid #E2E8F0; padding: 20px; border-radius: 12px; }
-        .result-card h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; margin-bottom: 4px; }
-        .result-card .result-number { font-size: 32px; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
-        .result-card p { font-size: 13px; color: #64748B; }
-        .result-card.featured { background: #EFF6FF; border-color: #BFDBFE; }
-        .result-card.featured h4 { color: #1E40AF; }
-        .result-card.featured .result-number { font-size: 40px; color: #2563EB; }
-        .security-wall { margin: 60px auto 40px auto; max-width: 800px; text-align: center; border-top: 1px solid #E2E8F0; padding-top: 40px; }
-        .security-wall p { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #94A3B8; font-weight: 600; margin-bottom: 20px; }
-        .logo-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-        .logo-item { font-size: 14px; font-weight: 600; color: #64748B; background: #F1F5F9; padding: 8px 16px; border-radius: 6px; border: 1px solid #E2E8F0; }
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; text-align: center; }
-            .hero-content { align-items: center; }
-            .hero h1 { text-align: center; }
-            .hero .subtitle { text-align: center; }
-            .roi-grid { grid-template-columns: 1fr; gap: 24px; }
-        }
+
+        /* Контент поверх фона */
+        .content-overlay { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+        .badge { display: inline-block; background: #1E40AF; color: #DBEAFE; padding: 6px 16px; border-radius: 99px; font-size: 13px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        h1 { font-size: 40px; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; }
+        h1 span { color: #3B82F6; }
+        .subtitle { font-size: 18px; color: #94A3B8; max-width: 750px; margin: 0 auto 40px auto; }
+        .cta-pointer { background: rgba(37, 99, 235, 0.2); border: 1px dashed #3B82F6; padding: 14px 24px; border-radius: 8px; display: inline-block; font-weight: 600; color: #60A5FA; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        /* Калькулятор окупаемости (ROI) */
+        .roi-box { background: rgba(15, 23, 42, 0.85); border: 1px solid #334155; border-radius: 16px; padding: 32px; margin: 50px auto; text-align: left; backdrop-filter: blur(10px); }
+        .roi-box h2 { font-size: 24px; margin-bottom: 24px; text-align: center; }
+        .roi-box h2 span { color: #3B82F6; }
+        .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #94A3B8; }
+        .input-group label span { color: #3B82F6; }
+        .input-group input[type="range"] { width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: #334155; outline: none; }
+        .input-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #3B82F6; cursor: pointer; }
+        .roi-results { display: grid; gap: 16px; }
+        .res-card { background: #1E293B; border: 1px solid #334155; padding: 16px; border-radius: 10px; }
+        .res-card h4 { font-size: 12px; text-transform: uppercase; color: #64748B; margin-bottom: 4px; }
+        .res-number { font-size: 28px; font-weight: 700; color: #F8FAFC; }
+        .res-card.premium { background: rgba(37, 99, 235, 0.15); border-color: #2563EB; }
+        .res-card.premium .res-number { color: #3B82F6; font-size: 34px; }
+
+        /* Стена безопасности */
+        .security-tags { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 40px; border-top: 1px solid #334155; padding-top: 30px; }
+        .tag { font-size: 12px; font-weight: 600; color: #94A3B8; background: #1E293B; padding: 6px 12px; border-radius: 4px; border: 1px solid #334155; }
+
+        @media (max-width: 768px) { .roi-grid { grid-template-columns: 1fr; } h1 { font-size: 28px; } .subtitle { font-size: 15px; } }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <div class="badge">🔒 HIPAA-Compliant & Secure</div>
-            <h1>Automate Your Veterinary Front Desk with <span>Practice AI</span></h1>
-            <p class="subtitle">An intelligent clinical assistant that screens pet symptoms, quotes your exact pricing, and books appointments 24/7 without burning out your staff.</p>
-            <div class="cta-pointer">👉 Test the live interactive bot in the bottom right corner!</div>
-        </div>
-        <div class="hero-visual">
-            <div class="mockup-card">
-                <div class="mockup-header">
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    <span class="mockup-title">VetAI Clinical Workspace</span>
-                </div>
-                <div class="mockup-body">
-                    <div class="chat-line incoming">🐾 <b>Pet Owner:</b> My dog is vomiting and lethargic.</div>
-                    <div class="chat-line outgoing">🤖 <b>AI Assistant:</b> <span class="alert-text">[!] Urgent Symptom Detected.</span> This requires immediate clinical evaluation. I have an emergency slot open at 2:30 PM today. Shall I book it?</div>
-                    <div class="chat-line incoming">🐾 <b>Pet Owner:</b> Yes, please! Phone is 555-0199.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="features">
-        <div class="feature-card">
-            <h3>⚡ Zero-Hallucination Pricing</h3>
-            <p>Trained strictly on your clinic's protocols and fee schedules. Never quotes the wrong price.</p>
-        </div>
-        <div class="feature-card">
-            <h3>🩺 Strict Triage Protocol</h3>
-            <p>Never diagnoses. Instantly flags emergency symptoms (vomiting, trauma) and forces immediate clinic booking.</p>
-        </div>
-        <div class="feature-card">
-            <h3>💼 Full Data Lockdown</h3>
-            <p>Operates inside a secure encryption loop. BAA ready to comply with medical data privacy laws.</p>
-        </div>
-    </div>
 
-    <!-- 3. ROI CALCULATOR MODULE -->
-    <div class="roi-container">
-        <h2>Calculate Your <span>Practice Savings</span></h2>
-        <p class="roi-subtitle">See how much time and money your clinic can save with a HIPAA-compliant AI assistant.</p>
-        <div class="roi-grid">
-            <div class="roi-inputs">
-                <div class="input-group">
-                    <label for="staff-count">Number of Front Desk Staff: <span id="staff-val">3</span></label>
-                    <input type="range" id="staff-count" min="1" max="15" value="3" step="1">
+    <!-- Задний план со скриншотом клиники -->
+    <div class="bg-screenshot"></div>
+
+    <!-- Основной b2b-контент -->
+    <div class="content-overlay">
+        <div class="badge">🔒 HIPAA Compliant Sandbox</div>
+        <h1>AI Assistant Preview for Your Practice</h1>
+        <p class="subtitle">We built a secure, custom veterinary AI assistant trained on your clinical services. It screens triage emergencies, quotes accurate fees, and automates front-desk workflows 24/7.</p>
+        
+        <div class="cta-pointer">
+            👉 Test your live custom bot in the bottom right corner!
+        </div>
+
+        <!-- Модуль калькулятора ROI -->
+        <div class="roi-box">
+            <h2>Calculate Your <span>Monthly Savings</span></h2>
+            <div class="roi-grid">
+                <div class="roi-inputs">
+                    <div class="input-group">
+                        <label for="staff">Front Desk Staff Count: <span id="staff-lbl">3</span></label>
+                        <input type="range" id="staff" min="1" max="10" value="3">
+                    </div>
+                    <div class="input-group">
+                        <label for="rate">Avg Hourly Rate ($): <span id="rate-lbl">20</span>/hr</label>
+                        <input type="range" id="rate" min="15" max="40" value="20">
+                    </div>
+                    <div class="input-group">
+                        <label for="chats">After-Hour Chats / Mo: <span id="chats-lbl">40</span></label>
+                        <input type="range" id="chats" min="10" max="150" value="40" step="5">
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="hourly-rate">Average Hourly Rate ($): <span id="rate-val">20</span>/hr</label>
-                    <input type="range" id="hourly-rate" min="15" max="45" value="20" step="1">
-                </div>
-                <div class="input-group">
-                    <label for="missed-calls">Estimated Missed/After-Hour Chats per Month: <span id="calls-val">40</span></label>
-                    <input type="range" id="missed-calls" min="10" max="200" value="40" step="5">
-                </div>
-            </div>
-            <div class="roi-results">
-                <div class="result-card">
-                    <h4>Monthly Hours Saved</h4>
-                    <div class="result-number" id="hours-saved">45 hrs</div>
-                    <p>Staff time redirected to in-clinic patient care.</p>
-                </div>
-                <div class="result-card featured">
-                    <h4>Total Monthly Savings</h4>
-                    <div class="result-number" id="money-saved">$1,700</div>
-                    <p>Based on hours optimized + captured after-hour appointments.</p>
+                <div class="roi-results">
+                    <div class="res-card">
+                        <h4>Staff Hours Saved</h4>
+                        <div class="res-number" id="h-saved">45 hrs</div>
+                    </div>
+                    <div class="res-card premium">
+                        <h4>Est. Monthly Savings</h4>
+                        <div class="res-number" id="m-saved">$1,700</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 4. TRUST & SECURITY LOGOS -->
-    <div class="security-wall">
-        <p>Infrastructure Compliance & Data Protection</p>
-        <div class="logo-grid">
-            <div class="logo-item">🩺 HIPAA BAA READY</div>
-            <div class="logo-item">🛡️ SOC2 COMPLIANT</div>
-            <div class="logo-item">🔒 AES-256 ENCRYPTION</div>
-            <div class="logo-item">🇪🇺 GDPR PROTECTED</div>
+        <!-- Соответствие стандартам безопасности -->
+        <div class="security-tags">
+            <div class="tag">🩺 HIPAA BAA READY</div>
+            <div class="tag">🛡️ SOC2 COMPLIANT</div>
+            <div class="tag">🔒 AES-256 ENCRYPTION</div>
         </div>
     </div>
 
     <!-- ============================================================= -->
-    <!-- СЮДА ВСТАВЛЯЕТСЯ КОД ВИДЖЕТА ИЗ CHAT-DATA (ПАНЕЛЬ SHARE/EMBED) -->
-     <script
+    <!-- ВСТАВЬТЕ ВАШ КОД СТИКЕРА/ВИДЖЕТА ИЗ CHAT-DATA НИЖЕ -->
+    <script
         src="https://www.chat-data.com/embed.min.js?chatbotId=6a8b1282c7e53cbe0d11242b"
         defer>
     </script>
     <!-- ============================================================= -->
 
-    <!-- 5. JAVASCRIPT LOGIC FOR ROI CALCULATOR -->
+    <!-- Логика калькулятора ROI -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const staffInput = document.getElementById('staff-count');
-            const rateInput = document.getElementById('hourly-rate');
-            const callsInput = document.getElementById('missed-calls');
-            const staffVal = document.getElementById('staff-val');
-            const rateVal = document.getElementById('rate-val');
-            const callsVal = document.getElementById('calls-val');
-            const hoursSavedText = document.getElementById('hours-saved');
-            const moneySavedText = document.getElementById('money-saved');
+            const staffIn = document.getElementById('staff');
+            const rateIn = document.getElementById('rate');
+            const chatsIn = document.getElementById('chats');
+            const staffL = document.getElementById('staff-lbl');
+            const rateL = document.getElementById('rate-lbl');
+            const chatsL = document.getElementById('chats-lbl');
+            const hSaved = document.getElementById('h-saved');
+            const mSaved = document.getElementById('m-saved');
 
-            function calculateROI() {
-                const staff = parseInt(staffInput.value);
-                const rate = parseInt(rateInput.value);
-                const calls = parseInt(callsInput.value);
+            function updateROI() {
+                const s = parseInt(staffIn.value);
+                const r = parseInt(rateIn.value);
+                const c = parseInt(chatsIn.value);
                 
-                staffVal.textContent = staff;
-                rateVal.textContent = rate;
-                callsVal.textContent = calls;
+                staffL.textContent = s;
+                rateL.textContent = r;
+                chatsL.textContent = c;
                 
-                const hoursSaved = staff * 15;
-                const salarySavings = hoursSaved * rate;
-                const missedRevenueCaptured = (calls / 4) * 80; 
-                const totalSavings = salarySavings + missedRevenueCaptured;
+                const hours = s * 15;
+                const savings = (hours * r) + ((c / 4) * 80);
                 
-                hoursSavedText.textContent = `${hoursSaved} hrs`;
-                moneySavedText.textContent = `$${Math.round(totalSavings).toLocaleString()}`;
+                hSaved.textContent = `${hours} hrs`;
+                mSaved.textContent = `$${Math.round(savings).toLocaleString()}`;
             }
-            
-            staffInput.addEventListener('input', calculateROI);
-            rateInput.addEventListener('input', calculateROI);
-            callsInput.addEventListener('input', calculateROI);
-            calculateROI();
+            staffIn.addEventListener('input', updateROI);
+            rateIn.addEventListener('input', updateROI);
+            chatsIn.addEventListener('input', updateROI);
+            updateROI();
         });
     </script>
+</body>
+</html>
 </body>
 </html>
