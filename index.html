@@ -1,42 +1,152 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Интерактивная демонстрация для клиники</title>
+    <title>VetAI - HIPAA-Compliant AI Assistants for Veterinary Practices</title>
+    <!-- Подключаем современный b2b-шрифт -->
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        /* Растягиваем страницу и фиксируем скриншот на заднем плане */
-        html, body {
+        :root {
+            --primary: #0F172A;
+            --accent: #2563EB;
+            --text: #334155;
+            --bg: #F8FAFC;
+        }
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #f0f2f5;
         }
-        .bg-container {
-            width: 100%;
-            height: 100%;
-            /* Подставляем ваш скриншот */
-            background-image: url('background.jpg'); 
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-size: cover;
-            /* Легкое размытие, чтобы фокус внимания сместился на ИИ-чат */
-            filter: blur(1px) brightness(95%); 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+        /* Главный экран */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #DBEAFE;
+            color: #1E40AF;
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        h1 span {
+            color: var(--accent);
+        }
+        .subtitle {
+            font-size: 20px;
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+        /* Блок преимуществ */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            text-align: left;
+        }
+        .feature-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text);
+        }
+        /* Указатель на чат */
+        .cta-pointer {
+            background-color: #EFF6FF;
+            border: 1px dashed var(--accent);
+            padding: 16px;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: 500;
+            color: var(--accent);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .subtitle { font-size: 16px; }
+            .hero { padding: 60px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Контейнер для фонового изображения -->
-    <div class="bg-container"></div>
+    <section class="hero">
+        <div class="badge">🔒 HIPAA-Compliant & Secure</div>
+        <h1>Automate Your Veterinary Front Desk with <span>Practice AI</span></h1>
+        <p class="subtitle">An intelligent clinical assistant that screens pet symptoms, quotes your exact pricing, and books appointments 24/7 without burning out your staff.</p>
+        
+        <!-- Блок триггеров для b2b-клиента -->
+        <div class="features">
+            <div class="feature-card">
+                <h3>⚡ Zero-Hallucination Pricing</h3>
+                <p>Trained strictly on your clinic's protocols and fee schedules. Never quotes the wrong price.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🩺 Strict Triage Protocol</h3>
+                <p>Never diagnoses. Instantly flags emergency symptoms (vomiting, trauma) and forces immediate clinic booking.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💼 Full Data Lockdown</h3>
+                <p>Operates inside a secure encryption loop. BAA ready to comply with medical data privacy laws.</p>
+            </div>
+        </div>
 
+        <!-- Стрелка-указатель на чат-бот в углу -->
+        <div class="cta-pointer">
+            👉 Test the live interactive bot in the bottom right corner!
+        </div>
+    </section>
+
+    <!-- ========================================== -->
     <!-- ВСТАВЬТЕ СЮДА ВАШ КОД ВИДЖЕТА ИЗ CHAT-DATA -->
     <script
         src="https://www.chat-data.com/embed.min.js?chatbotId=6a8b1282c7e53cbe0d11242b"
         defer>
     </script>
+    <!-- ========================================== -->
+
+</body>
+</html>
 
 </body>
 </html>
