@@ -173,7 +173,202 @@
         border: 1px solid #E2E8F0;
     }
 </style>
+<div class="roi-container">
+    <h2>Calculate Your <span>Practice Savings</span></h2>
+    <p class="roi-subtitle">See how much time and money your clinic can save with a HIPAA-compliant AI assistant.</p>
 
+    <div class="roi-grid">
+        <!-- Левая колонка: Ползунки -->
+        <div class="roi-inputs">
+            <div class="input-group">
+                <label for="staff-count">Number of Front Desk Staff: <span id="staff-val">3</span></label>
+                <input type="range" id="staff-count" min="1" max="15" value="3" step="1">
+            </div>
+
+            <div class="input-group">
+                <label for="hourly-rate">Average Hourly Rate ($): <span id="rate-val">20</span>/hr</label>
+                <input type="range" id="hourly-rate" min="15" max="45" value="20" step="1">
+            </div>
+
+            <div class="input-group">
+                <label for="missed-calls">Estimated Missed/After-Hour Chats per Month: <span id="calls-val">40</span></label>
+                <input type="range" id="missed-calls" min="10" max="200" value="40" step="5">
+            </div>
+        </div>
+
+        <!-- Правая колонка: Результаты -->
+        <div class="roi-results">
+            <div class="result-card">
+                <h4>Monthly Hours Saved</h4>
+                <div class="result-number" id="hours-saved">45 hrs</div>
+                <p>Staff time redirected to in-clinic patient care.</p>
+            </div>
+
+            <div class="result-card featured">
+                <h4>Total Monthly Savings</h4>
+                <div class="result-number" id="money-saved">$1,700</div>
+                <p>Based on hours optimized + captured after-hour appointments.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Стили калькулятора */
+    .roi-container {
+        max-width: 1000px;
+        margin: 80px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        text-align: left;
+    }
+    .roi-container h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #0F172A;
+        text-align: center;
+    }
+    .roi-container h2 span { color: #2563EB; }
+    .roi-subtitle {
+        text-align: center;
+        color: #64748B;
+        margin-bottom: 40px;
+        font-size: 16px;
+    }
+    .roi-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+    @media (max-width: 768px) {
+        .roi-grid { grid-template-columns: 1fr; gap: 24px; }
+        .roi-container { padding: 24px; margin: 40px 20px; }
+    }
+    /* Стили ползунков */
+    .input-group {
+        margin-bottom: 28px;
+    }
+    .input-group label {
+        display: block;
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #334155;
+    }
+    .input-group label span {
+        color: #2563EB;
+        font-weight: 700;
+    }
+    .input-group input[type="range"] {
+        width: 100%;
+        -webkit-appearance: none;
+        height: 8px;
+        border-radius: 4px;
+        background: #E2E8F0;
+        outline: none;
+    }
+    .input-group input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #2563EB;
+        cursor: pointer;
+        transition: transform 0.1s;
+    }
+    .input-group input[type="range"]::-webkit-slider-thumb:hover {
+        transform: scale(1.15);
+    }
+    /* Стили результатов */
+    .roi-results {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 16px;
+    }
+    .result-card {
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        padding: 20px;
+        border-radius: 12px;
+    }
+    .result-card h4 {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #64748B;
+        margin-bottom: 4px;
+    }
+    .result-card .result-number {
+        font-size: 32px;
+        font-weight: 700;
+        color: #0F172A;
+        margin-bottom: 4px;
+    }
+    .result-card p {
+        font-size: 13px;
+        color: #64748B;
+    }
+    .result-card.featured {
+        background: #EFF6FF;
+        border-color: #BFDBFE;
+    }
+    .result-card.featured h4 { color: #1E40AF; }
+    .result-card.featured .result-number {
+        font-size: 40px;
+        color: #2563EB;
+    }
+</style>
+
+<script>
+    // Логика расчета ROI
+    document.addEventListener('DOMContentLoaded', function() {
+        const staffInput = document.getElementById('staff-count');
+        const rateInput = document.getElementById('hourly-rate');
+        const callsInput = document.getElementById('missed-calls');
+
+        const staffVal = document.getElementById('staff-val');
+        const rateVal = document.getElementById('rate-val');
+        const callsVal = document.getElementById('calls-val');
+
+        const hoursSavedText = document.getElementById('hours-saved');
+        const moneySavedText = document.getElementById('money-saved');
+
+        function calculateROI() {
+            const staff = parseInt(staffInput.value);
+            const rate = parseInt(rateInput.value);
+            const calls = parseInt(callsInput.value);
+
+            // Обновляем текст возле ползунков
+            staffVal.textContent = staff;
+            rateVal.textContent = rate;
+            callsVal.textContent = calls;
+
+            // Формула 2026: ИИ экономит в среднем 15 часов рутины в месяц на одного администратора
+            const hoursSaved = staff * 15;
+            
+            // Экономия на зарплате + возврат упущенной выгоды (считаем, что ИИ конвертирует каждые 4 ночных чата в 1 реальный визит со средним чеком $80)
+            const salarySavings = hoursSaved * rate;
+            const missedRevenueCaptured = (calls / 4) * 80; 
+            const totalSavings = salarySavings + missedRevenueCaptured;
+
+            // Вывод результатов на экран
+            hoursSavedText.textContent = `${hoursSaved} hrs`;
+            moneySavedText.textContent = `$${Math.round(totalSavings).toLocaleString()}`;
+        }
+
+        // Слушаем движения ползунков
+        staffInput.addEventListener('input', calculateROI);
+        rateInput.addEventListener('input', calculateROI);
+        callsInput.addEventListener('input', calculateROI);
+
+        // Первый расчет при загрузке
+        calculateROI();
+    });
+</script>
         <!-- Стрелка-указатель на чат-бот в углу -->
         <div class="cta-pointer">
             👉 Test the live interactive bot in the bottom right corner!
