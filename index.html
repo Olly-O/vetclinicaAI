@@ -3,144 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetAI - 1-Click Operations Infrastructure for Veterinary Clinics</title>
+    <title>VetAI - Clinical Operations Infrastructure for Veterinary Practices</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
             --primary: #0F172A;
             --accent: #2563EB;
-            --text: #334155;
+            --text: #475569;
             --bg: #F8FAFC;
             --border: #E2E8F0;
-            --emergency: #DC2626;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
             color: var(--primary);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
         }
+        
+        /* HERO SECTION (SERIOUS & POWERFUL) */
         .hero {
-            max-width: 900px; margin: 0 auto; padding: 80px 20px 40px 20px; text-align: center;
+            max-width: 800px; margin: 0 auto; padding: 90px 20px 40px 20px; text-align: center;
         }
         .badge {
-            display: inline-block; background-color: #DBEAFE; color: #1E40AF;
-            padding: 6px 16px; border-radius: 99px; font-size: 13px;
-            font-weight: 600; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px;
+            display: inline-block; background-color: #EFF6FF; color: var(--accent);
+            padding: 6px 14px; border-radius: 99px; font-size: 13px;
+            font-weight: 600; margin-bottom: 20px; text-transform: uppercase; border: 1px solid #BFDBFE;
         }
-        h1 { font-size: 48px; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 24px; color: var(--primary); line-height: 1.15; }
+        h1 { font-size: 46px; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 16px; color: var(--primary); line-height: 1.15; }
         h1 span { color: var(--accent); }
-        .subtitle { font-size: 20px; color: var(--text); max-width: 750px; margin: 0 auto 40px auto; }
+        .subtitle { font-size: 20px; color: var(--text); max-width: 680px; margin: 0 auto 30px auto; font-weight: 400; }
+        
         .cta-pointer {
-            background-color: #EFF6FF; border: 1px dashed var(--accent); padding: 16px 28px;
+            background-color: #EFF6FF; border: 1px dashed var(--accent); padding: 12px 24px;
             border-radius: 8px; display: inline-block; font-weight: 600; color: var(--accent);
-            animation: bounce 2s infinite;
+            animation: bounce 2s infinite; font-size: 14px;
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         
+        /* FIXED SIMPLICITY BANNER */
         .deploy-banner {
-            max-width: 1100px; margin: 40px auto 60px auto; background: #EFF6FF; border: 2px solid #BFDBFE;
-            border-radius: 16px; padding: 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.05);
+            max-width: 900px; margin: 20px auto 60px auto; background: white; border: 1px solid var(--border);
+            border-radius: 12px; padding: 24px 32px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
         }
-        .deploy-text { text-align: left; }
-        .deploy-text h2 { font-size: 24px; font-weight: 700; color: #1E40AF; margin-bottom: 8px; }
-        .deploy-text p { font-size: 15px; color: #1E3A8A; }
-        .deploy-action {
-            background: var(--accent); color: white; padding: 14px 28px; border-radius: 8px;
-            font-weight: 700; font-size: 14px; border: none; white-space: nowrap; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-        }
-        .section-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 36px; font-weight: 700; margin-bottom: 12px; letter-spacing: -1px; }
-        .section-subtitle { text-align: center; color: #64748B; font-size: 17px; margin-bottom: 48px; }
+        .deploy-banner h2 { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+        .deploy-banner p { font-size: 14.5px; color: var(--text); }
+        .deploy-banner p span { color: var(--accent); font-weight: 600; }
         
-        .pipeline { display: flex; flex-direction: column; gap: 24px; margin-bottom: 80px; }
+        /* INFRASTRUCTURE PIPELINE */
+        .section-container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .section-title { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.8px; }
+        .section-subtitle { text-align: center; color: #64748B; font-size: 16px; margin-bottom: 40px; }
+        
+        .pipeline { display: flex; flex-direction: column; gap: 16px; margin-bottom: 60px; }
         .pipeline-step {
-            background: white; border: 1px solid var(--border); border-radius: 14px; padding: 32px;
-            display: grid; grid-template-columns: 60px 1fr 240px; align-items: center; gap: 32px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02); transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            background: white; border: 1px solid var(--border); border-radius: 12px; padding: 24px;
+            display: grid; grid-template-columns: 50px 1fr 180px; align-items: center; gap: 24px;
         }
-        .pipeline-step:hover { transform: translateY(-2px); border-color: #BFDBFE; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04); }
-        .step-icon { font-size: 32px; text-align: center; line-height: 1; }
+        .step-icon { font-size: 28px; text-align: center; }
         .step-info { text-align: left; }
-        .step-info h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--primary); }
-        .step-info p { font-size: 14.5px; color: var(--text); }
-        .step-info ul { margin-top: 10px; padding-left: 20px; }
-        .step-info li { font-size: 13.5px; color: var(--text); margin-bottom: 4px; }
+        .step-info h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; color: var(--primary); }
+        .step-info p { font-size: 14px; color: var(--text); }
+        .step-info ul { margin-top: 6px; padding-left: 18px; }
+        .step-info li { font-size: 13px; color: var(--text); margin-bottom: 2px; }
         
         .step-tag {
-            background: #F1F5F9; padding: 12px 16px; border-radius: 8px; font-size: 12.5px; font-weight: 600;
-            color: #475569; text-align: center; border: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px;
+            background: #F1F5F9; padding: 10px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+            color: #475569; text-align: center; border: 1px solid var(--border); text-transform: uppercase;
         }
         .step-tag.highlight { background: #EFF6FF; border-color: #BFDBFE; color: var(--accent); }
-        .step-tag.emergency { background: #FEF2F2; border-color: #FCA5A5; color: var(--emergency); font-weight: 700; }
-        .step-tag.success { background: #ECFDF5; border-color: #A7F3D0; color: #059669; }
+        .step-tag.emergency { background: #FEF2F2; border-color: #FCA5A5; color: #DC2626; }
 
-        .roi-container { background: white; padding: 40px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); margin-bottom: 60px; }
-        .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .input-group { margin-bottom: 28px; }
-        .input-group label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 10px; color: #334155; text-align: left; }
+        /* ROI CALCULATOR & SECURITY STYLES */
+        .roi-container { background: white; padding: 32px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 50px; }
+        .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #334155; text-align: left; }
         .input-group label span { color: #2563EB; font-weight: 700; }
-        .input-group input[type="range"] { width: 100%; -webkit-appearance: none; height: 8px; border-radius: 4px; background: #E2E8F0; outline: none; }
-        .input-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #2563EB; cursor: pointer; transition: transform 0.1s; }
-        .input-group input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-        .roi-results { display: grid; grid-template-rows: auto 1fr; gap: 16px; }
-        .result-card { background: #F8FAFC; border: 1px solid var(--border); padding: 20px; border-radius: 12px; text-align: left; }
-        .result-card h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; margin-bottom: 4px; }
-        .result-card .result-number { font-size: 32px; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
-        .result-card p { font-size: 13px; color: #64748B; }
+        .input-group input[type="range"] { width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: #E2E8F0; outline: none; }
+        .input-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #2563EB; cursor: pointer; }
+        .roi-results { display: grid; gap: 12px; }
+        .result-card { background: #F8FAFC; border: 1px solid var(--border); padding: 16px; border-radius: 8px; text-align: left; }
+        .result-card h4 { font-size: 14px; text-transform: uppercase; color: #64748B; margin-bottom: 2px; }
+        .result-card .result-number { font-size: 26px; font-weight: 700; color: #0F172A; }
+        .result-card p { font-size: 12px; color: #64748B; }
         .result-card.featured { background: #EFF6FF; border-color: #BFDBFE; }
-        .result-card.featured h4 { color: #1E40AF; }
-        .result-card.featured .result-number { font-size: 40px; color: #2563EB; }
+        .result-card.featured .result-number { font-size: 32px; color: #2563EB; }
         
-        .security-wall { margin: 80px auto 40px auto; max-width: 800px; text-align: center; border-top: 1px solid var(--border); padding-top: 40px; }
-        .security-wall p { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #94A3B8; font-weight: 600; margin-bottom: 20px; }
-        .logo-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-        .logo-item { font-size: 14px; font-weight: 600; color: #64748B; background: #F1F5F9; padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); }
+        .security-wall { margin: 60px auto 20px auto; max-width: 700px; text-align: center; border-top: 1px solid var(--border); padding-top: 30px; }
+        .security-wall p { font-size: 11px; text-transform: uppercase; color: #94A3B8; margin-bottom: 16px; font-weight: 600; }
+        .logo-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .logo-item { font-size: 12px; font-weight: 600; color: #64748B; background: #F1F5F9; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border); }
         #chat-data-bubble, .chat-data-widget, iframe[src*="chat-data"] { z-index: 999999 !important; }
 
-        @media (max-width: 900px) {
-            h1 { font-size: 36px; } .subtitle { font-size: 18px; }
-            .deploy-banner { flex-direction: column; text-align: center; padding: 24px; }
-            .deploy-text { text-align: center; }
-            .pipeline-step { grid-template-columns: 1fr; gap: 16px; text-align: center; padding: 24px; }
-            .step-icon { margin: 0 auto; } .roi-grid { grid-template-columns: 1fr; gap: 24px; }
+        @media (max-width: 768px) {
+            h1 { font-size: 34px; } .subtitle { font-size: 18px; }
+            .deploy-banner { text-align: center; padding: 20px; }
+            .pipeline-step { grid-template-columns: 1fr; text-align: center; gap: 12px; }
+            .step-icon { margin: 0 auto; } .roi-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. POWERFUL HERO -->
     <section class="hero">
         <div class="badge">🔒 HIPAA-Compliant Operations Infrastructure</div>
-        <h1>Automate Your Veterinary Practice with <span>Autonomous AI Modules</span></h1>
-        <p class="subtitle">Implement an enterprise-grade AI-powered medical assistant that will process patient data 24/7, schedule appointments, and manage recurring workflows. Fully integrates with your existing software.</p>
-        <div class="cta-pointer">👉 Interact with the live interface in the bottom right corner!</div>
+        <h1>Automate Your Veterinary Front Desk with <span>Autonomous AI Infrastructure</span></h1>
+        <p class="subtitle">An enterprise-grade medical AI assistant that handles triage, clinical intake, and operational workflows 24/7. No tech friction, no software changes.</p>
+        <div class="cta-pointer">👉 Interact with the live workspace in the bottom right corner!</div>
     </section>
 
+    <!-- 2. FRICTIONLESS DEPLOYMENT BANNER -->
     <div class="deploy-banner">
-        <div class="deploy-text">
-            <h2>1-Click Background Deployment</h2>
-            <p><b>No software transitions or training required.</b> The modules run autonomously through a single line of script code on your site. Your current PMS/CRM remains completely untouched.</p>
-        </div>
-        <button class="deploy-action">⚡ 2-Minute Installation</button>
+        <h2>Zero Integration Friction</h2>
+        <p>The entire infrastructure runs completely <span>independent of your current software layout</span>. It auto-syncs data in the background, requires absolutely no team tech training, and leaves your existing veterinary CRM untouched.</p>
     </div>
+        <!-- 3. COMPACT PIPELINE MODULES -->
     <div class="section-container">
-        <h2 class="section-title">Automated Infrastructure Modules</h2>
-        <p class="section-subtitle">A deep breakdown of the 16 specialized capabilities driving efficiency at your practice.</p>
+        <h2 class="section-title">Automated Infrastructure Capabilities</h2>
+        <p class="section-subtitle">A streamlined look at the 16 core functions optimizing your practice operations.</p>
         <div class="pipeline">
 
             <!-- MODULE 1: INTAKE & SCHEDULING -->
             <div class="pipeline-step">
                 <div class="step-icon">📅</div>
                 <div class="step-info">
-                    <h3>Module 1: Smart Intake & 24/7 Scheduling</h3>
+                    <h3>Smart Intake & 24/7 Scheduling</h3>
                     <p>Automates primary client acquisition and repetitive front-desk communications without human operators.</p>
                     <ul>
-                        <li><b>24/7 Instant Responses:</b> Instantly answers FAQ regarding working hours, price lists, services, address, and parking layout.</li>
-                        <li><b>Online Booking & Data Pre-fill:</b> Guides users to choose open slots, capturing patient age, breed, and symptoms to lower staff workload.</li>
-                        <li><b>Conversion Rate Optimization:</b> Leverages proactive exit-intent prompts (“Need help booking?”) to recover abandoned intake forms.</li>
+                        <li><b>24/7 Availability:</b> Instantly answers FAQs about hours, exact fees, parking, and specific clinical services.</li>
+                        <li><b>Booking & Pre-fill:</b> Guides users to choose open slots while capturing patient age, breed, and symptoms.</li>
+                        <li><b>Conversion Recovery:</b> Uses proactive chat cues to capture phone numbers from incomplete bookings.</li>
                     </ul>
                 </div>
                 <div class="step-tag highlight">⚡ 60-80% Routine Cut</div>
@@ -150,62 +145,33 @@
             <div class="pipeline-step">
                 <div class="step-icon">🩺</div>
                 <div class="step-info">
-                    <h3>Module 2: Automated Clinical Triage</h3>
+                    <h3>Clinical Triage & Media Processing</h3>
                     <p>Acts as an intelligent filter, safely structures symptoms, and guides pet parents before they arrive.</p>
                     <ul>
-                        <li><b>Triage & Initial Consultation:</b> Sorts symptoms by emergency level, determines when to rush to the clinic immediately, and routes patients to the correct specialist (surgeon, dermatologist, tech).</li>
-                        <li><b>Media Processing:</b> Securely accepts photos, videos, and documents (pet passports, past lab reports) to accelerate clinical prep.</li>
-                        <li><b>Emergency Channel Sync:</b> Features a prominent, instant "EMERGENCY!" protocol button that connects critical cases directly to the on-duty doctor.</li>
+                        <li><b>Triage Routing:</b> Sorts symptoms by urgency and routes patients directly to the correct specialist.</li>
+                        <li><b>Media Parsing:</b> Securely accepts photos, videos, and documents (pet passports, past lab reports).</li>
+                        <li><b>Emergency Sync:</b> Includes an instant "EMERGENCY!" trigger connecting critical cases to the on-duty doctor.</li>
                     </ul>
                 </div>
                 <div class="step-tag emergency">🚨 Critical Safety Node</div>
             </div>
 
-            <!-- MODULE 3: RETENTION & LIFETIME VALUE -->
+            <!-- MODULE 3: RETENTION & OPERATIONS -->
             <div class="pipeline-step">
                 <div class="step-icon">📈</div>
                 <div class="step-info">
-                    <h3>Module 3: Patient Retention & Upsell Engine</h3>
-                    <p>Leverages historical analytics and database context to extend the lifetime value (LTV) of every pet owner.</p>
+                    <h3>Retention, Compliance & Analytics</h3>
+                    <p>Ensures total administrative accuracy, brand compliance, and automatic data synchronization.</p>
                     <ul>
-                        <li><b>Data-Driven Personalization:</b> Remembers visit history, past procedures, and client preferences (e.g., favorite doctor) for hyper-accurate guidance.</li>
-                        <li><b>Automated Care Reminders:</b> Sends automated alerts for upcoming vaccinations, revaccinations, deworming, flea treatments, and follow-up checks.</li>
-                        <li><b>Revenue Expansion:</b> Educates owners on custom preventative wellness plans, pet insurance options, and contextually upsells services (microchipping, dental care).</li>
+                        <li><b>Care Reminders & Upsells:</b> Triggers personalized alerts for vaccines/parasite checks and promotes wellness plans.</li>
+                        <li><b>Data Compliance:</b> Locks responses to your official fee sheets and enforces data privacy compliance.</li>
+                        <li><b>Practice Insights:</b> Maps data to your records and logs trends on peak hours or booking cancellation reasons.</li>
                     </ul>
                 </div>
-                <div class="step-tag success">💰 Direct LTV Expansion</div>
-            </div>
-            <div class="pipeline-step">
-                <div class="step-icon">💼</div>
-                <div class="step-info">
-                    <h3>Module 4: Enterprise Operations & Compliance</h3>
-                    <p>Ensures complete administrative accuracy and alignment with legal data regulations.</p>
-                    <ul>
-                        <li><b>Unified Brand Voice:</b> Responses are strictly tied to your locked knowledge base (approved fees, protocols, offers) with easy centralized updating.</li>
-                        <li><b>Seamless PMS/CRM Mapping:</b> Synchronizes bookings, records leads, and flags urgent anomalies, reducing human manual data-entry errors.</li>
-                        <li><b>Data Privacy & Consent:</b> Enforces mandatory privacy check-boxes and securely logs interaction history in full alignment with local data regulations.</li>
-                    </ul>
-                </div>
-                <div class="step-tag">🔒 Zero-Glitches Guaranteed</div>
+                <div class="step-tag success">💰 Direct LTV Growth</div>
             </div>
 
-            <!-- MODULE 5: ANALYTICS & MACHINE LEARNING -->
-            <div class="pipeline-step">
-                <div class="step-icon">🧠</div>
-                <div class="step-info">
-                    <h3>Module 5: Demand Analytics & Continuous Training</h3>
-                    <p>Transforms raw communication data into actionable strategic insights for management.</p>
-                    <ul>
-                        <li><b>Inquiry Analytics:</b> Generates deep reports on top client complaints, peak traffic hours, and booking cancellation reasons to adjust staffing schedules.</li>
-                        <li><b>Continuous Learning Loop:</b> The underlying system grows more precise over time by parsing actual anonymized chat transcripts under a controlled quality loop.</li>
-                        <li><b>Localization & Multi-Language Support:</b> Dynamically translates and operates in multiple local languages to support diverse neighborhoods.</li>
-                    </ul>
-                </div>
-                <div class="step-tag highlight">📊 Smart Data Insights</div>
-            </div>
-
-        </div> <!-- Конец блока pipeline -->
-
+        </div> <!-- End of pipeline container -->
         <!-- 4. PRACTICE ROI CALCULATOR MODULE -->
         <div class="roi-container">
             <h2 style="text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 8px;">Calculate Your <span>Practice Savings</span></h2>
@@ -298,3 +264,5 @@
     </script>
 </body>
 </html>
+
+
