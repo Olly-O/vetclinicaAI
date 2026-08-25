@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetAI - HIPAA-Compliant AI Assistants for Veterinary Practices</title>
-    <!-- Подключаем современный b2b-шрифт -->
+    <title>VetAI - Workflow Automation & Advanced Infrastructure for Veterinary Clinics</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
@@ -13,11 +12,7 @@
             --text: #334155;
             --bg: #F8FAFC;
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg);
@@ -25,365 +20,236 @@
             line-height: 1.5;
             overflow-x: hidden;
         }
-        /* Главный экран */
         .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-            text-align: center;
+            max-width: 1200px; margin: 0 auto; padding: 90px 20px 40px 20px;
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;
         }
+        .hero-content { display: flex; flex-direction: column; align-items: flex-start; }
         .badge {
-            display: inline-block;
-            background-color: #DBEAFE;
-            color: #1E40AF;
-            padding: 6px 16px;
-            border-radius: 99px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            display: inline-block; background-color: #DBEAFE; color: #1E40AF;
+            padding: 6px 16px; border-radius: 99px; font-size: 14px;
+            font-weight: 600; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        h1 {
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-            color: var(--primary);
-            white-space: nowrap;
-        }
-        h1 span {
-            color: var(--accent);
-        }
-        .subtitle {
-            font-size: 20px;
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-        }
-        /* Блок преимуществ */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto 60px auto;
-            text-align: left;
-        }
-        .feature-card {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid #E2E8F0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-        .feature-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--primary);
-        }
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text);
-        }
-        /* Указатель на чат */
+        h1 { font-size: 46px; font-weight: 700; letter-spacing: -1px; margin-bottom: 20px; color: var(--primary); line-height: 1.2; }
+        h1 span { color: var(--accent); }
+        .subtitle { font-size: 19px; color: var(--text); margin: 0 0 36px 0; }
         .cta-pointer {
-            background-color: #EFF6FF;
-            border: 1px dashed var(--accent);
-            padding: 16px;
-            border-radius: 8px;
-            display: inline-block;
-            font-weight: 500;
-            color: var(--accent);
+            background-color: #EFF6FF; border: 1px dashed var(--accent); padding: 16px;
+            border-radius: 8px; display: inline-block; font-weight: 500; color: var(--accent);
             animation: bounce 2s infinite;
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        
+        .hero-visual { display: flex; justify-content: center; }
+        .mockup-card {
+            background: #0F172A; border-radius: 12px; width: 100%; max-width: 460px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3); border: 1px solid #334155; font-family: monospace; font-size: 12px;
         }
-        @media (max-width: 768px) {
-            h1 { font-size: 32px; }
-            .subtitle { font-size: 16px; }
-            .hero { padding: 60px 20px; }
+        .mockup-header {
+            background: #1E293B; padding: 12px; border-top-left-radius: 11px;
+            border-top-right-radius: 11px; display: flex; align-items: center; border-bottom: 1px solid #334155;
+        }
+        .dot { width: 8px; height: 8px; background: #EF4444; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .dot:nth-child(2) { background: #F59E0B; }
+        .dot:nth-child(3) { background: #10B981; }
+        .mockup-title { color: #94A3B8; margin-left: 12px; font-size: 11px; font-family: 'Inter', sans-serif; font-weight: 500; }
+        .mockup-body { padding: 20px; color: #E2E8F0; }
+        
+        .wf-node { background: #1E293B; border: 1px solid #475569; border-radius: 6px; padding: 12px; margin-bottom: 16px; position: relative; }
+        .wf-node::after { content: '↓'; position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); color: #64748B; font-weight: bold; font-size: 14px; }
+        .wf-node:last-child { margin-bottom: 0; }
+        .wf-node:last-child::after { display: none; }
+        .wf-title { font-weight: bold; color: #38BDF8; font-size: 11px; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .wf-desc { color: #94A3B8; }
+        .wf-alert { color: #F87171; font-weight: bold; }
+        .wf-success { color: #34D399; font-weight: bold; }
+
+        .section-title { text-align: center; font-size: 32px; font-weight: 700; margin: 60px 0 16px 0; letter-spacing: -0.5px; }
+        .section-subtitle { text-align: center; color: #64748B; font-size: 16px; margin-bottom: 40px; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
+        .feature-card { background: white; padding: 28px; border-radius: 12px; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--primary); }
+        .feature-card p { font-size: 14px; color: var(--text); }
+        
+        .roi-container { max-width: 1200px; margin: 40px auto; background: white; padding: 40px; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
+        .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .input-group { margin-bottom: 28px; }
+        .input-group label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 10px; color: #334155; }
+        .input-group label span { color: #2563EB; font-weight: 700; }
+        .input-group input[type="range"] { width: 100%; -webkit-appearance: none; height: 8px; border-radius: 4px; background: #E2E8F0; outline: none; }
+        .input-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #2563EB; cursor: pointer; transition: transform 0.1s; }
+        .input-group input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+        .roi-results { display: grid; grid-template-rows: auto 1fr; gap: 16px; }
+        .result-card { background: #F8FAFC; border: 1px solid #E2E8F0; padding: 20px; border-radius: 12px; }
+        .result-card h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; margin-bottom: 4px; }
+        .result-card .result-number { font-size: 32px; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
+        .result-card p { font-size: 13px; color: #64748B; }
+        .result-card.featured { background: #EFF6FF; border-color: #BFDBFE; }
+        .result-card.featured h4 { color: #1E40AF; }
+        .result-card.featured .result-number { font-size: 40px; color: #2563EB; }
+        .security-wall { margin: 60px auto 40px auto; max-width: 800px; text-align: center; border-top: 1px solid #E2E8F0; padding-top: 40px; }
+        .security-wall p { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #94A3B8; font-weight: 600; margin-bottom: 20px; }
+        .logo-grid { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+        .logo-item { font-size: 14px; font-weight: 600; color: #64748B; background: #F1F5F9; padding: 8px 16px; border-radius: 6px; border: 1px solid #E2E8F0; }
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; text-align: center; }
+            .hero-content { align-items: center; }
+            .hero h1 { text-align: center; }
+            .hero .subtitle { text-align: center; }
+            .roi-grid { grid-template-columns: 1fr; gap: 24px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. HERO MAIN HEADER WITH AUTOMATION NODE SIMULATION -->
     <section class="hero">
-        <div class="badge">🔒 HIPAA-Compliant & Secure</div>
-        <h1>Automate Your Veterinary Front Desk with <span>Practice AI</span></h1>
-        <p class="subtitle">An intelligent clinical assistant that screens pet symptoms, quotes your exact pricing, and books appointments 24/7 without burning out your staff.</p>
+        <div class="hero-content">
+            <div class="badge">🔒 Advanced Workflow Automation</div>
+            <h1>Beyond Simple Chat: A Full <span>Clinical AI Concierge</span></h1>
+            <p class="subtitle">An autonomous background infrastructure that deploys interactive intake forms, filters medical emergency triage, and instantly emails structured SOAP summaries to your desk.</p>
+            <div class="cta-pointer">👉 Test the live interactive workspace in the bottom right corner!</div>
+        </div>
         
-        <!-- Блок триггеров для b2b-клиента -->
-        <div class="features">
-            <div class="feature-card">
-                <h3>⚡ Zero-Hallucination Pricing</h3>
-                <p>Trained strictly on your clinic's protocols and fee schedules. Never quotes the wrong price.</p>
+        <div class="hero-visual">
+            <div class="mockup-card">
+                <div class="mockup-header">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="mockup-title">VetAI Live Pipeline Workflow</span>
+                </div>
+                <div class="mockup-body">
+                    <div class="wf-node">
+                        <div class="wf-title">📥 Node 1: Smart Intake UI Triggered</div>
+                        <div class="wf-desc">Pet owner inputs symptoms: <span class="wf-alert">Severe Lethargy & Vomiting</span></div>
+                    </div>
+                    <div class="wf-node">
+                        <div class="wf-title">🧠 Node 2: Conditional Medical Triage</div>
+                        <div class="wf-desc">Status evaluated: <span class="wf-alert">CRITICAL ESCALATION REQUIREMENT</span></div>
+                    </div>
+                    <div class="wf-node">
+                        <div class="wf-title">⚡ Node 3: Instant Routing Sync</div>
+                        <div class="wf-desc">Push-notification dispatched to clinic staff Telegram channel</div>
+                    </div>
+                    <div class="wf-node">
+                        <div class="wf-title">📄 Node 4: Autonomous SOAP Writer</div>
+                        <div class="wf-desc">Structured summary compiled and emailed to vet desk <span class="wf-success">[Sent]</span></div>
+                    </div>
+                </div>
             </div>
-            <div class="feature-card">
-                <h3>🩺 Strict Triage Protocol</h3>
-                <p>Never diagnoses. Instantly flags emergency symptoms (vomiting, trauma) and forces immediate clinic booking.</p>
-            </div>
-            <div class="feature-card">
-                <h3>💼 Full Data Lockdown</h3>
-                <p>Operates inside a secure encryption loop. BAA ready to comply with medical data privacy laws.</p>
-            </div>
-        </div>
-        <div class="security-wall">
-    <p>Infrastructure Compliance & Data Protection</p>
-    <div class="logo-grid">
-        <div class="logo-item">🩺 HIPAA BAA READY</div>
-        <div class="logo-item">🛡️ SOC2 COMPLIANT</div>
-        <div class="logo-item">🔒 AES-256 ENCRYPTION</div>
-        <div class="logo-item">🇪🇺 GDPR PROTECTED</div>
-    </div>
-</div>
-
-<style>
-    .security-wall {
-        margin: 60px auto 40px auto;
-        max-width: 800px;
-        text-align: center;
-        border-top: 1px solid #E2E8F0;
-        padding-top: 40px;
-    }
-    .security-wall p {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: #94A3B8;
-        font-weight: 600;
-        margin-bottom: 20px;
-    }
-    .logo-grid {
-        display: flex;
-        justify-content: center;
-        gap: 32px;
-        flex-wrap: wrap;
-    }
-    .logo-item {
-        font-size: 14px;
-        font-weight: 600;
-        color: #64748B;
-        background: #F1F5F9;
-        padding: 8px 16px;
-        border-radius: 6px;
-        border: 1px solid #E2E8F0;
-    }
-</style>
-        <div class="roi-container">
-    <h2>Calculate Your <span>Practice Savings</span></h2>
-    <p class="roi-subtitle">See how much time and money your clinic can save with a HIPAA-compliant AI assistant.</p>
-
-    <div class="roi-grid">
-        <!-- Левая колонка: Ползунки -->
-        <div class="roi-inputs">
-            <div class="input-group">
-                <label for="staff-count">Number of Front Desk Staff: <span id="staff-val">3</span></label>
-                <input type="range" id="staff-count" min="1" max="15" value="3" step="1">
-            </div>
-
-            <div class="input-group">
-                <label for="hourly-rate">Average Hourly Rate ($): <span id="rate-val">20</span>/hr</label>
-                <input type="range" id="hourly-rate" min="15" max="45" value="20" step="1">
-            </div>
-
-            <div class="input-group">
-                <label for="missed-calls">Estimated Missed/After-Hour Chats per Month: <span id="calls-val">40</span></label>
-                <input type="range" id="missed-calls" min="10" max="200" value="40" step="5">
-            </div>
-        </div>
-
-        <!-- Правая колонка: Результаты -->
-        <div class="roi-results">
-            <div class="result-card">
-                <h4>Monthly Hours Saved</h4>
-                <div class="result-number" id="hours-saved">45 hrs</div>
-                <p>Staff time redirected to in-clinic patient care.</p>
-            </div>
-
-            <div class="result-card featured">
-                <h4>Total Monthly Savings</h4>
-                <div class="result-number" id="money-saved">$1,700</div>
-                <p>Based on hours optimized + captured after-hour appointments.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-    /* Стили калькулятора */
-    .roi-container {
-        max-width: 1000px;
-        margin: 80px auto;
-        background: white;
-        padding: 40px;
-        border-radius: 16px;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-        text-align: left;
-    }
-    .roi-container h2 {
-        font-size: 32px;
-        font-weight: 700;
-        margin-bottom: 8px;
-        color: #0F172A;
-        text-align: center;
-    }
-    .roi-container h2 span { color: #2563EB; }
-    .roi-subtitle {
-        text-align: center;
-        color: #64748B;
-        margin-bottom: 40px;
-        font-size: 16px;
-    }
-    .roi-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-    }
-    @media (max-width: 768px) {
-        .roi-grid { grid-template-columns: 1fr; gap: 24px; }
-        .roi-container { padding: 24px; margin: 40px 20px; }
-    }
-    /* Стили ползунков */
-    .input-group {
-        margin-bottom: 28px;
-    }
-    .input-group label {
-        display: block;
-        font-size: 15px;
-        font-weight: 600;
-        margin-bottom: 10px;
-        color: #334155;
-    }
-    .input-group label span {
-        color: #2563EB;
-        font-weight: 700;
-    }
-    .input-group input[type="range"] {
-        width: 100%;
-        -webkit-appearance: none;
-        height: 8px;
-        border-radius: 4px;
-        background: #E2E8F0;
-        outline: none;
-    }
-    .input-group input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #2563EB;
-        cursor: pointer;
-        transition: transform 0.1s;
-    }
-    .input-group input[type="range"]::-webkit-slider-thumb:hover {
-        transform: scale(1.15);
-    }
-    /* Стили результатов */
-    .roi-results {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        gap: 16px;
-    }
-    .result-card {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        padding: 20px;
-        border-radius: 12px;
-    }
-    .result-card h4 {
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: #64748B;
-        margin-bottom: 4px;
-    }
-    .result-card .result-number {
-        font-size: 32px;
-        font-weight: 700;
-        color: #0F172A;
-        margin-bottom: 4px;
-    }
-    .result-card p {
-        font-size: 13px;
-        color: #64748B;
-    }
-    .result-card.featured {
-        background: #EFF6FF;
-        border-color: #BFDBFE;
-    }
-    .result-card.featured h4 { color: #1E40AF; }
-    .result-card.featured .result-number {
-        font-size: 40px;
-        color: #2563EB;
-    }
-</style>
-
-<script>
-    // Логика расчета ROI
-    document.addEventListener('DOMContentLoaded', function() {
-        const staffInput = document.getElementById('staff-count');
-        const rateInput = document.getElementById('hourly-rate');
-        const callsInput = document.getElementById('missed-calls');
-
-        const staffVal = document.getElementById('staff-val');
-        const rateVal = document.getElementById('rate-val');
-        const callsVal = document.getElementById('calls-val');
-
-        const hoursSavedText = document.getElementById('hours-saved');
-        const moneySavedText = document.getElementById('money-saved');
-
-        function calculateROI() {
-            const staff = parseInt(staffInput.value);
-            const rate = parseInt(rateInput.value);
-            const calls = parseInt(callsInput.value);
-
-            // Обновляем текст возле ползунков
-            staffVal.textContent = staff;
-            rateVal.textContent = rate;
-            callsVal.textContent = calls;
-
-            // Формула 2026: ИИ экономит в среднем 15 часов рутины в месяц на одного администратора
-            const hoursSaved = staff * 15;
-            
-            // Экономия на зарплате + возврат упущенной выгоды (считаем, что ИИ конвертирует каждые 4 ночных чата в 1 реальный визит со средним чеком $80)
-            const salarySavings = hoursSaved * rate;
-            const missedRevenueCaptured = (calls / 4) * 80; 
-            const totalSavings = salarySavings + missedRevenueCaptured;
-
-            // Вывод результатов на экран
-            hoursSavedText.textContent = `${hoursSaved} hrs`;
-            moneySavedText.textContent = `$${Math.round(totalSavings).toLocaleString()}`;
-        }
-
-        // Слушаем движения ползунков
-        staffInput.addEventListener('input', calculateROI);
-        rateInput.addEventListener('input', calculateROI);
-        callsInput.addEventListener('input', calculateROI);
-
-        // Первый расчет при загрузке
-        calculateROI();
-    });
-</script>
-        <!-- Стрелка-указатель на чат-бот в углу -->
-        <div class="cta-pointer">
-            👉 Test the live interactive bot in the bottom right corner!
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- ВСТАВЬТЕ СЮДА ВАШ КОД ВИДЖЕТА ИЗ CHAT-DATA -->
+    <h2 class="section-title">Automated Infrastructure Modules</h2>
+    <p class="section-subtitle">How background automated nodes optimize your veterinary workflows effortlessly.</p>
+     <!-- 2. ADVANCED WORKFLOW FEATURES GRID -->
+    <div class="features">
+        <div class="feature-card">
+            <h3>📱 Interactive UI Forms</h3>
+            <p>Deploys dynamic micro-forms inside the chat. Clients choose species, symptoms, and dates via intuitive buttons, raising lead conversion by 35%.</p>
+        </div>
+        <div class="feature-card">
+            <h3>🚨 Smart Triage Routing</h3>
+            <p>Automated logic nodes immediately spot emergency triggers and send instant push-alerts to your staff's Telegram or WhatsApp group chat.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📄 Automated SOAP Summaries</h3>
+            <p>Converts raw client chat data into structured clinical SOAP notes (Subjective, Objective, Assessment, Plan) and emails them straight to the doctor's desk.</p>
+        </div>
+        <div class="feature-card">
+            <h3>📬 Pre-Visit Intake Flows</h3>
+            <p>Once a booking is finalized, the system automatically emails precise instructions (e.g., fasting rules for ultrasounds) to reduce missed appointments.</p>
+        </div>
+    </div>
+
+    <!-- 3. ROI CALCULATOR MODULE -->
+    <div class="roi-container">
+        <h2>Calculate Your <span>Practice Savings</span></h2>
+        <p class="roi-subtitle">See how much time and money your clinic can save with an automated workflow assistant.</p>
+        <div class="roi-grid">
+            <div class="roi-inputs">
+                <div class="input-group">
+                    <label for="staff-count">Number of Front Desk Staff: <span id="staff-val">3</span></label>
+                    <input type="range" id="staff-count" min="1" max="15" value="3" step="1">
+                </div>
+                <div class="input-group">
+                    <label for="hourly-rate">Average Hourly Rate ($): <span id="rate-val">20</span>/hr</label>
+                    <input type="range" id="hourly-rate" min="15" max="45" value="20" step="1">
+                </div>
+                <div class="input-group">
+                    <label for="missed-calls">Estimated Missed/After-Hour Chats per Month: <span id="calls-val">40</span></label>
+                    <input type="range" id="missed-calls" min="10" max="200" value="40" step="5">
+                </div>
+            </div>
+            <div class="roi-results">
+                <div class="result-card">
+                    <h4>Monthly Hours Saved</h4>
+                    <div class="result-number" id="hours-saved">45 hrs</div>
+                    <p>Staff time redirected to in-clinic patient care.</p>
+                </div>
+                <div class="result-card featured">
+                    <h4>Total Monthly Savings</h4>
+                    <div class="result-number" id="money-saved">$1,700</div>
+                    <p>Based on hours optimized + captured after-hour appointments.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. TRUST & SECURITY LOGOS -->
+    <div class="security-wall">
+        <p>Infrastructure Compliance & Data Protection</p>
+        <div class="logo-grid">
+            <div class="logo-item">🩺 HIPAA BAA READY</div>
+            <div class="logo-item">🛡️ SOC2 COMPLIANT</div>
+            <div class="logo-item">🔒 AES-256 ENCRYPTION</div>
+            <div class="logo-item">🇪🇺 GDPR PROTECTED</div>
+        </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- СЮДА ВСТАВЛЯЕТСЯ КОД ВИДЖЕТА ИЗ CHAT-DATA (ПАНЕЛЬ SHARE/EMBED) -->
     <script
         src="https://www.chat-data.com/embed.min.js?chatbotId=6a8b1282c7e53cbe0d11242b"
         defer>
     </script>
-    <!-- ========================================== -->
+    <!-- ============================================================= -->
 
-</body>
-</html>
+    <!-- 5. JAVASCRIPT LOGIC FOR ROI CALCULATOR -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const staffInput = document.getElementById('staff-count');
+            const rateInput = document.getElementById('hourly-rate');
+            const callsInput = document.getElementById('missed-calls');
+            const staffVal = document.getElementById('staff-val');
+            const rateVal = document.getElementById('rate-val');
+            const callsVal = document.getElementById('calls-val');
+            const hoursSavedText = document.getElementById('hours-saved');
+            const moneySavedText = document.getElementById('money-saved');
+
+            function calculateROI() {
+                const staff = parseInt(staffInput.value);
+                const rate = parseInt(rateInput.value);
+                const calls = parseInt(callsInput.value);
+                
+                staffVal.textContent = staff;
+                rateVal.textContent = rate;
+                callsVal.textContent = calls;
+                
+                const hoursSaved = staff * 15;
+                const salarySavings = hoursSaved * rate;
+                const missedRevenueCaptured = (calls / 4) * 80; 
+                const totalSavings = salarySavings + missedRevenueCaptured;
+                
+                hoursSavedText.textContent = `${hoursSaved} hrs`;
+                moneySavedText.textContent = `$${Math.round(totalSavings).toLocaleString()}`;
+            }
+            
+            staffInput.addEventListener('input', calculateROI);
+            rateInput.addEventListener('input', calculateROI);
+            callsInput.addEventListener('input', calculateROI);
+            calculateROI();
+        });
+    </script>
 </body>
 </html>
